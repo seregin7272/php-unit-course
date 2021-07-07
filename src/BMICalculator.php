@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
 class BMICalculator
 {
-    public $BMI;
+    public float $BMI;
 
-    public $mass;
+    public float $mass;
 
-    public $height;
+    public float $height;
 
     public function calculate(): float
     {
@@ -17,7 +18,7 @@ class BMICalculator
     {
         if ($this->BMI < 18) {
             $result = 'Недостаточная масса';
-        } elseif ($this->BMI > 18 && $this->BMI < 25) {
+        } elseif ($this->BMI >= 18 && $this->BMI <= 25) {
             $result = 'Нормальная масса';
         } else {
             $result = 'Избыточная масса';

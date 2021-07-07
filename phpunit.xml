@@ -3,9 +3,9 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          executionOrder="depends,defects"
-         forceCoversAnnotation="true"
+         forceCoversAnnotation="false"
          beStrictAboutCoversAnnotation="true"
-         beStrictAboutOutputDuringTests="true"
+         beStrictAboutOutputDuringTests="false"
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true"
          colors="true">
@@ -15,6 +15,9 @@
         </testsuite>
         <testsuite name="BMI">
             <directory>./tests/BMICalculatorTest.php</directory>
+        </testsuite>
+        <testsuite name="Fixtures">
+            <directory>./tests/Fixtures</directory>
         </testsuite>
     </testsuites>
 

@@ -2,7 +2,7 @@
 
 class BMICalculatorTest extends \PHPUnit\Framework\TestCase
 {
-    public function testUnderWeightText()
+    public function testUnderWeightText(): void
     {
         $bmi = new BMICalculator();
         $bmi->BMI = 17;
@@ -12,17 +12,22 @@ class BMICalculatorTest extends \PHPUnit\Framework\TestCase
         self::assertSame($expected, $result);
     }
 
-    public function testNormalWeightText()
+    public function testNormalWeightText(): void
     {
-        $bmi = new BMICalculator();
-        $bmi->BMI = 24;
-        $result = $bmi->getTextResult();
         $expected = 'Нормальная масса';
+        $bmi = new BMICalculator();
+        $bmi->BMI = 18;
+        $result = $bmi->getTextResult();
+
+        self::assertSame($expected, $result);
+
+        $bmi->BMI = 25;
+        $result = $bmi->getTextResult();
 
         self::assertSame($expected, $result);
     }
 
-    public function testOverWeightText()
+    public function testOverWeightText(): void
     {
         $bmi = new BMICalculator();
         $bmi->BMI = 26;
@@ -32,17 +37,17 @@ class BMICalculatorTest extends \PHPUnit\Framework\TestCase
         self::assertSame($expected, $result);
     }
 
-    public function testCorrectValueCalc()
+    public function testCorrectValueCalc(): void
     {
-        $expected = 27.7;
+        $expected = 26.6;
         $bmi = new BMICalculator();
-        $bmi->mass = 100;
-        $bmi->height = 1.9;
+        $bmi->mass = 77;
+        $bmi->height = 1.7;
         $result = $bmi->calculate();
         self::assertSame($expected, $result);
     }
 
-    public function testHomePage()
+    public function testHomePage(): void
     {
         self::assertEquals(BASE_URL, 'http://php-unit-course.loc');
     }
