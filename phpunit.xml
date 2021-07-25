@@ -11,7 +11,14 @@
          colors="true">
     <testsuites>
         <testsuite name="default">
-            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+
+        <testsuite name="all">
+            <directory>tests/Unit</directory>
+            <file>tests/Acceptance/BackendStuffTest.php</file>
+            <directory>tests/Integration</directory>
+            <file>tests/Acceptance/FrontendStuffTest.php</file>
         </testsuite>
     </testsuites>
 

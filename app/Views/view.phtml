@@ -1,0 +1,98 @@
+<?php
+declare(strict_types=1);
+
+ include('layout/header.phtml'); ?>
+
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="medium-6 cell">
+                <h3>
+                    <?php
+                    if($editCategory?? false):?>
+                        Редактировать категорию
+                    <?php else:?>
+                        Добавить новую категорию
+                    <?php endif;?>
+                </h3>
+
+                <?php if($messages['categoryDeleted']?? false):?>
+                    <div class="callout alert">
+                        Категория успешно удалена
+                    </div>
+                <?php endif; ?>
+
+<?php if(isset($messages['addCategory']) && $messages['addCategory'] === true):?>
+    <div class="callout success">
+        Категория сохранена
+    </div>
+    <?php endif; ?>
+
+
+    <?php if(isset($messages['addCategory']) && $messages['addCategory'] === false):?>
+    <div class="callout alert">
+        Правильно заполните форму
+    </div>
+    <?php endif; ?>
+
+<form action="<?= $baseUrl?>/add-category" method="post">
+
+                <label>
+                    Name
+                    <input type="text" name="name" placeholder="Name" value="<?= $editCategory['name']?? '' ?>" />
+                </label>
+                <label
+                >Description
+                    <textarea name="description" placeholder="Description"><?= $editCategory['description']?? '' ?></textarea>
+                </label>
+                <label>Parent category
+                    <select id="categories-list" name="categories_list">
+                        <option value="0">--choose--</option>
+                        <?php foreach ($selectCategoryList as $categoryOption):?>
+                            <option
+                                    <?php if(($editCategory?? false) && $editCategory['parent_id'] === $categoryOption['id']):?>  selected <?php endif;?>
+                                    value="<?= $categoryOption['id']?>"><?= $categoryOption['name']?></option>
+                        <?php endforeach;?>
+                    </select>
+                </label>
+
+    <?php
+    if($editCategory?? false):?>
+       <input type="hidden" name="category_id" value="<?= $editCategory['id']?>">
+    <?php endif;?>
+                <input
+                        type="submit"
+                        class="button expanded"
+                        value="Save category"
+                />
+            </div>
+    </form>
+            <div class="medium-6 large-5 cell large-offset-1">
+                <div class="basic-card">
+                    <div class="basic-card-content content callout secondary">
+                        <h5><?= isset($category) ? $category->name : 'Выберите категорию в меню' ?></h5>
+                        <?php if($category?? false):?>
+                            <p>
+                              <?= $category->description?>
+                            </p>
+                        <?php endif;?>
+                    </div>
+                <?php if($category?? false):?>
+                    <div class="links callout primary">
+                        <ul class="menu">
+                            <li>
+                                <a href="/edit-category/<?= $category->id?>">Edit</a>
+                            </li>
+                            <li>
+                                <a id="delete-category-link" onclick="return  confirm('Вы хоите удалить категорию?')" href="/delete-category/<?= $category->id?>">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php endif;?>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+    </div>
+
+<?php include('layout/footer.phtml'); ?>
